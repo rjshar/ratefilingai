@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ group_name }} – RateFilingAI</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 0.5rem; border-bottom: 1px solid #ccc; text-align: right; }
+        th { background-color: #f0f0f0; text-align: center; }
+        td:first-child, th:first-child { text-align: left; }
+        tr:hover { background-color: #f9f9f9; }
+        .button { padding: 0.4rem 0.75rem; background: #0070f3; color: white; text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>{{ group_name }}</h1>
+    <p>Below are the entities affiliated with this group and their latest MI WC market stats.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Entity</th>
+                <th>Premium</th>
+                <th>Market Share</th>
+                <th>Loss Ratio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+            <tr>
+                <td>{{ entity["Entity Name"] }}</td>
+                <td>${{ "{:,.0f}".format(entity["Direct Premium Written"]) }}</td>
+                <td>{{ "%.2f"|format(entity["Market Share"]) }}%</td>
+                <td>{{ "%.1f"|format(entity["Loss Ratio"]) }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+    <h2>Filing Summary</h2>
+    <p>Coming soon: summaries, SERFF numbers, and chatbot access for this group.</p>
+
+    <p><a href="/groups" class="button">⬅ Back to All Groups</a></p>
+</body>
+</html>
