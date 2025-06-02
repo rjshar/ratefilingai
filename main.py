@@ -1,79 +1,47 @@
-from fastapi import FastAPI, Form
-from fastapi.responses import HTMLResponse, RedirectResponse
-import stripe
-import os
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+import pandas as pd
 
 app = FastAPI()
+templates = Jinja2Templates(directory="templates")
 
-# 🔐 Basic password (still works)
-SECRET_PASSWORD = "insurancerules"
+# 📊 Load and format 3-year market share data
+df = pd.read_csv("data/marketshare_groups.csv")
 
-# 💳 Stripe setup
-stripe.api_key = os.environ["STRIPE_SECRET_KEY"]
-DOMAIN = "https://ratefilingai.onrender.com"  # ← Update this if needed
+df.rename(columns={
+    "2024 Rank": "Rank",
+    "Entity *": "Group",
+    "Market Share (%) 2024": "Share 2024",
+    "Market Share (%) 2023": "Share 2023",
+    "Market Share (%) 2022": "Share 2022",
+    "Direct Premiums Written ($000) 2024": "Premium 2024",
+    "Direct Premiums Written ($000) 2023": "Premium 2023",
+    "Direct Premiums Written ($000) 2022": "Premium 2022"
+}, inplace=True)
 
-summaries = {
-    "af group": "<h2>Accident Fund Group – MI WC Filing</h2>...",
-    "chubb": "<h2>Chubb Group – MI WC Filing</h2>...",
-    "travelers": "<h2>Travelers Group – MI WC Filing</h2>...",
-    "liberty": "<h2>Liberty Mutual Group – MI WC Filing</h2>...",
-    "hartford": "<h2>Hartford Group – MI WC Filing</h2>...",
-    "zurich": "<h2>Zurich Group – MI WC Filing</h2>...",
-    "caom": "<h2>CAOM – Advisory Loss Cost Filing</h2>..."
+# Clean missing values
+for col in ["Share 2024", "Share 2023", "Share 2022",
+            "Premium 2024", "Premium 2023", "Premium 2022"]:
+    df[col] = df[col].fillna(0)
+
+# Total industry stats
+industry_total = {
+    "Rank": "-",
+    "Group": "Total Industry",
+    "Share 2024": 100.0,
+    "Share 2023": 100.0,
+    "Share 2022": 100.0,
+    "Premium 2024": df["Premium 2024"].sum(),
+    "Premium 2023": df["Premium 2023"].sum(),
+    "Premium 2022": df["Premium 2022"].sum()
 }
 
-@app.get("/", response_class=HTMLResponse)
-async def home():
-    return f"""
-    <html>
-    <body>
-        <h1>RateFilingAI Demo</h1>
-        <p><b>Enter group name and password:</b></p>
-        <form action="/summary" method="post">
-            Group Name: <input type="text" name="group"><br>
-            Password: <input type="password" name="password"><br>
-            <input type="submit" value="Get Filing Summary">
-        </form>
-        <hr>
-        <h3>Or Subscribe for Unlimited Access:</h3>
-        <form action="/create-checkout-session" method="POST">
-            <button type="submit">💳 Subscribe with Stripe</button>
-        </form>
-    </body>
-    </html>
-    """
+group_records = [industry_total] + df.sort_values(by="Rank").to_dict(orient="records")
 
-@app.post("/summary", response_class=HTMLResponse)
-async def summary(group: str = Form(...), password: str = Form(...)):
-    if password != SECRET_PASSWORD:
-        return "<p>❌ Incorrect password. Access denied.</p>"
-
-    key = group.lower()
-    for name in summaries:
-        if name in key:
-            return summaries[name]
-    return f"<p>No filing data available for group: {group}</p>"
-
-@app.post("/create-checkout-session")
-async def create_checkout_session():
-    try:
-        session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            mode='payment',
-            line_items=[{
-                'price_data': {
-                    'currency': 'usd',
-                    'unit_amount': 1500,  # $15.00
-                    'product_data': {
-                        'name': 'RateFilingAI Access',
-                        'description': 'Access to Michigan WC filing summaries'
-                    },
-                },
-                'quantity': 1,
-            }],
-            success_url=f"{DOMAIN}/?success=true",
-            cancel_url=f"{DOMAIN}/?canceled=true",
-        )
-        return RedirectResponse(url=session.url, status_code=303)
-    except Exception as e:
-        return HTMLResponse(f"<p>Error creating Stripe session: {e}</p>")
+@app.get("/groups", response_class=HTMLResponse)
+async def group_listing(request: Request):
+    return templates.TemplateResponse("groups.html", {
+        "request": request,
+        "groups": group_records
+    })
