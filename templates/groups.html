@@ -6,9 +6,10 @@
         body { font-family: sans-serif; padding: 2rem; }
         table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
         th, td { padding: 0.5rem; border-bottom: 1px solid #ccc; text-align: right; }
-        th { background-color: #f0f0f0; text-align: center; }
-        td:first-child, th:first-child { text-align: left; }
+        th { background-color: #f0f0f0; text-align: center; cursor: pointer; }
+        td:first-child, th:first-child { text-align: left; width: 60px; }
         td:nth-child(2), th:nth-child(2) { text-align: left; }
+        tr:hover { background-color: #f9f9f9; }
         .button {
             padding: 0.4rem 0.75rem;
             background: #0070f3;
@@ -22,18 +23,18 @@
     <h1>Michigan WC Market Overview</h1>
     <p>Compare group market share and premium over the past 3 years. Click a group to view filings and details.</p>
 
-    <table>
+    <table id="market-table">
         <thead>
             <tr>
-                <th rowspan="2">Rank</th>
-                <th rowspan="2">Group Name</th>
-                <th colspan="3">Market Share (%)</th>
-                <th colspan="3">Direct Premiums ($000)</th>
-                <th rowspan="2">Details</th>
-            </tr>
-            <tr>
-                <th>2024</th><th>2023</th><th>2022</th>
-                <th>2024</th><th>2023</th><th>2022</th>
+                <th onclick="sortTable(0)">Rank</th>
+                <th onclick="sortTable(1)">Group</th>
+                <th onclick="sortTable(2)">2024 Share</th>
+                <th onclick="sortTable(3)">2023 Share</th>
+                <th onclick="sortTable(4)">2022 Share</th>
+                <th onclick="sortTable(5)">2024 Premium</th>
+                <th onclick="sortTable(6)">2023 Premium</th>
+                <th onclick="sortTable(7)">2022 Premium</th>
+                <th>Details</th>
             </tr>
         </thead>
         <tbody>
@@ -56,5 +57,47 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <script>
+        function sortTable(n) {
+            const table = document.getElementById("market-table");
+            let rows, switching, i, x, y, shouldSwitch, dir, switchCount = 0;
+            switching = true;
+            dir = "asc";
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < rows.length - 1; i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                    let xContent = x.innerHTML.replace(/[$,%]/g, "").replace(/,/g, "");
+                    let yContent = y.innerHTML.replace(/[$,%]/g, "").replace(/,/g, "");
+
+                    let xVal = isNaN(xContent) ? xContent.toLowerCase() : parseFloat(xContent);
+                    let yVal = isNaN(yContent) ? yContent.toLowerCase() : parseFloat(yContent);
+
+                    if ((dir === "asc" && xVal > yVal) || (dir === "desc" && xVal < yVal)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchCount++;
+                } else {
+                    if (switchCount === 0 && dir === "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
