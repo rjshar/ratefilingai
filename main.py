@@ -7,7 +7,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 # 📊 Load and format 3-year market share data
-df = pd.read_csv("data/marketshare_groups.csv")
+df = pd.read_csv("data/cleaned_marketshare_groups.csv")
 
 df.rename(columns={
     "2024 Rank": "Rank",
