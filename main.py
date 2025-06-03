@@ -67,3 +67,9 @@ async def group_detail(slug: str, request: Request):
         "group_name": matched_group,
         "entities": group_entities.to_dict(orient="records")
     })
+
+from fastapi.responses import RedirectResponse
+
+@app.get("/", include_in_schema=False)
+async def root():
+    return RedirectResponse(url="/groups")
