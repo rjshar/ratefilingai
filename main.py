@@ -43,6 +43,8 @@ async def group_listing(request: Request):
     })
 
 def slugify(text):
+    if not isinstance(text, str):
+        return ""
     return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
 
 entity_df = pd.read_csv("data/cleaned_marketshare_entities.csv")
@@ -50,7 +52,7 @@ entity_df = pd.read_csv("data/cleaned_marketshare_entities.csv")
 @app.get("/group/{slug}", response_class=HTMLResponse)
 async def group_detail(slug: str, request: Request):
     matched_group = None
-    for group_name in group_df["Group"].unique():
+    for group_name in group_df["Group"].dropna().unique():
         if slugify(group_name) == slug:
             matched_group = group_name
             break
