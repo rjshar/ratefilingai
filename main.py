@@ -1,13 +1,11 @@
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 import pandas as pd
 import re
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
-
-# Add slugify filter to Jinja templates
 templates.env.filters["slugify"] = lambda s: re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-') if isinstance(s, str) else ""
 
 # Load group-level data
@@ -38,6 +36,10 @@ industry_total = {
 }
 group_records = [industry_total] + group_df.sort_values(by="Rank").to_dict(orient="records")
 
+@app.get("/", include_in_schema=False)
+async def root():
+    return RedirectResponse(url="/groups")
+
 @app.get("/groups", response_class=HTMLResponse)
 async def group_listing(request: Request):
     return templates.TemplateResponse("groups.html", {
@@ -51,6 +53,9 @@ def slugify(text):
     return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
 
 entity_df = pd.read_csv("data/cleaned_marketshare_entities.csv")
+entity_df["Direct Premium Written"] = entity_df["Direct Premium Written"].fillna(0)
+entity_df["Market Share"] = entity_df["Market Share"].fillna(0)
+entity_df["Loss Ratio"] = entity_df["Loss Ratio"].fillna(0)
 
 @app.get("/group/{slug}", response_class=HTMLResponse)
 async def group_detail(slug: str, request: Request):
@@ -70,9 +75,3 @@ async def group_detail(slug: str, request: Request):
         "group_name": matched_group,
         "entities": group_entities.to_dict(orient="records")
     })
-
-from fastapi.responses import RedirectResponse
-
-@app.get("/", include_in_schema=False)
-async def root():
-    return RedirectResponse(url="/groups")

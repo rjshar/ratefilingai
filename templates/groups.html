@@ -1,88 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MI WC Market Share – RateFilingAI</title>
-    <style>
-        body { font-family: sans-serif; padding: 2rem; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { padding: 0.5rem; border-bottom: 1px solid #ccc; text-align: right; }
-        th { background-color: #f0f0f0; text-align: center; cursor: pointer; }
-        td:first-child, th:first-child { text-align: left; width: 60px; }
-        td:nth-child(2), th:nth-child(2) { text-align: left; }
-        tr:hover { background-color: #f9f9f9; }
-        .button { padding: 0.4rem 0.75rem; background: #0070f3; color: white; text-decoration: none; border-radius: 4px; }
-    </style>
+  <title>MI WC Market Share – RateFilingAI</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 0.5rem; border-bottom: 1px solid #ccc; text-align: right; }
+    th { background-color: #f0f0f0; text-align: center; cursor: pointer; }
+    td:first-child, th:first-child { text-align: left; width: 60px; }
+    td:nth-child(2), th:nth-child(2) { text-align: left; }
+    tr:hover { background-color: #f9f9f9; }
+    .button { padding: 0.4rem 0.75rem; background: #0070f3; color: white; text-decoration: none; border-radius: 4px; }
+  </style>
 </head>
 <body>
-    <h1>Michigan WC Market Overview</h1>
-    <p>Click a group to view its entities, filings, and Q&A.</p>
+  <h1>Michigan WC Market Overview</h1>
+  <p>Click a group to view its entities, filings, and Q&A.</p>
 
-    <table id="market-table">
-        <thead>
-            <tr>
-                <th onclick="sortTable(0)">Rank</th>
-                <th onclick="sortTable(1)">Group</th>
-                <th onclick="sortTable(2)">2024 Share</th>
-                <th onclick="sortTable(3)">2023 Share</th>
-                <th onclick="sortTable(4)">2022 Share</th>
-                <th onclick="sortTable(5)">2024 Premium</th>
-                <th onclick="sortTable(6)">2023 Premium</th>
-                <th onclick="sortTable(7)">2022 Premium</th>
-                <th>Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for group in groups %}
-            <tr>
-                <td>{{ group["Rank"] }}</td>
-                <td>{{ group["Group"] }}</td>
-                <td>{{ "%.2f"|format(group["Share 2024"]) }}</td>
-                <td>{{ "%.2f"|format(group["Share 2023"]) }}</td>
-                <td>{{ "%.2f"|format(group["Share 2022"]) }}</td>
-                <td>${{ "{:,.0f}".format(group["Premium 2024"]) }}</td>
-                <td>${{ "{:,.0f}".format(group["Premium 2023"]) }}</td>
-                <td>${{ "{:,.0f}".format(group["Premium 2022"]) }}</td>
-                <td>
-                    {% if group["Rank"] != "-" %}
-                    <a class="button" href="/group/{{ group['Group'] | slugify }}">View</a>
-                    {% else %}-{% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+  <table id="market-table">
+    <thead>
+      <tr>
+        <th onclick="sortTable(0)">Rank</th>
+        <th onclick="sortTable(1)">Group</th>
+        <th onclick="sortTable(2)">2024 Share</th>
+        <th onclick="sortTable(3)">2023 Share</th>
+        <th onclick="sortTable(4)">2022 Share</th>
+        <th onclick="sortTable(5)">2024 Premium</th>
+        <th onclick="sortTable(6)">2023 Premium</th>
+        <th onclick="sortTable(7)">2022 Premium</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for group in groups %}
+      <tr>
+        <td>{{ group["Rank"] }}</td>
+        <td>{{ group["Group"] }}</td>
+        <td>{{ "%.2f"|format(group["Share 2024"]) }}</td>
+        <td>{{ "%.2f"|format(group["Share 2023"]) }}</td>
+        <td>{{ "%.2f"|format(group["Share 2022"]) }}</td>
+        <td>${{ "{:,.0f}".format(group["Premium 2024"]) }}</td>
+        <td>${{ "{:,.0f}".format(group["Premium 2023"]) }}</td>
+        <td>${{ "{:,.0f}".format(group["Premium 2022"]) }}</td>
+        <td>
+          {% if group["Rank"] != "-" %}
+            <a class="button" href="/group/{{ group['Group'] | slugify }}">View</a>
+          {% else %}-{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-    <script>
-        function sortTable(n) {
-            const table = document.getElementById("market-table");
-            let rows, switching = true, dir = "asc", switchCount = 0;
+  <script>
+    function sortTable(n) {
+      const table = document.getElementById("market-table");
+      let rows, switching = true, dir = "asc", switchCount = 0;
 
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-                for (let i = 1; i < rows.length - 1; i++) {
-                    let shouldSwitch = false;
-                    let x = rows[i].getElementsByTagName("TD")[n];
-                    let y = rows[i + 1].getElementsByTagName("TD")[n];
-                    let xVal = x.innerHTML.replace(/[$,%]/g, "").replace(/,/g, "");
-                    let yVal = y.innerHTML.replace(/[$,%]/g, "").replace(/,/g, "");
-                    xVal = isNaN(xVal) ? xVal.toLowerCase() : parseFloat(xVal);
-                    yVal = isNaN(yVal) ? yVal.toLowerCase() : parseFloat(yVal);
-                    if ((dir === "asc" && xVal > yVal) || (dir === "desc" && xVal < yVal)) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    switchCount++;
-                } else if (switchCount === 0 && dir === "asc") {
-                    dir = "desc";
-                    switching = true;
-                }
-            }
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (let i = 1; i < rows.length - 1; i++) {
+          let shouldSwitch = false;
+          let x = rows[i].getElementsByTagName("TD")[n];
+          let y = rows[i + 1].getElementsByTagName("TD")[n];
+          let xVal = x.innerText.replace(/[$,%]/g, "").replace(/,/g, "");
+          let yVal = y.innerText.replace(/[$,%]/g, "").replace(/,/g, "");
+          xVal = isNaN(xVal) ? xVal.toLowerCase() : parseFloat(xVal);
+          yVal = isNaN(yVal) ? yVal.toLowerCase() : parseFloat(yVal);
+          if ((dir === "asc" && xVal > yVal) || (dir === "desc" && xVal < yVal)) {
+            shouldSwitch = true;
+            break;
+          }
         }
-    </script>
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          switchCount++;
+        } else if (switchCount === 0 && dir === "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  </script>
 </body>
 </html>
