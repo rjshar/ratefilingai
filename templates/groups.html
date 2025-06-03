@@ -64,10 +64,10 @@
           let shouldSwitch = false;
           let x = rows[i].getElementsByTagName("TD")[n];
           let y = rows[i + 1].getElementsByTagName("TD")[n];
-          let xVal = x.innerText.replace(/[$,%]/g, "").replace(/,/g, "");
-          let yVal = y.innerText.replace(/[$,%]/g, "").replace(/,/g, "");
-          xVal = isNaN(xVal) ? xVal.toLowerCase() : parseFloat(xVal);
-          yVal = isNaN(yVal) ? yVal.toLowerCase() : parseFloat(yVal);
+          let xVal = x.textContent.replace(/[^0-9.-]+/g, "");
+          let yVal = y.textContent.replace(/[^0-9.-]+/g, "");
+          xVal = parseFloat(xVal) || 0;
+          yVal = parseFloat(yVal) || 0;
           if ((dir === "asc" && xVal > yVal) || (dir === "desc" && xVal < yVal)) {
             shouldSwitch = true;
             break;

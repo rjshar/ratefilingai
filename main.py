@@ -52,10 +52,18 @@ def slugify(text):
         return ""
     return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
 
+# Entity-level data
 entity_df = pd.read_csv("data/cleaned_marketshare_entities.csv")
-entity_df["Direct Premiums Written ($000) 2024"] = entity_df["Direct Premiums Written ($000) 2024"].fillna(0)
-entity_df["Market Share (%) 2024"] = entity_df["Market Share (%) 2024"].fillna(0)
-entity_df["Adjusted Loss Ratio (%) 2024"] = entity_df["Adjusted Loss Ratio (%) 2024"].fillna(0)
+
+def parse_float(val):
+    try:
+        return float(val)
+    except:
+        return 0.0
+
+entity_df["Direct Premiums Written ($000) 2024"] = entity_df["Direct Premiums Written ($000) 2024"].apply(parse_float)
+entity_df["Market Share (%) 2024"] = entity_df["Market Share (%) 2024"].apply(parse_float)
+entity_df["Adjusted Loss Ratio (%) 2024"] = entity_df["Adjusted Loss Ratio (%) 2024"].apply(parse_float)
 
 @app.get("/group/{slug}", response_class=HTMLResponse)
 async def group_detail(slug: str, request: Request):

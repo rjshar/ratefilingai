@@ -29,21 +29,9 @@
       {% for entity in entities %}
       <tr>
         <td>{{ entity["Entity Name"] }}</td>
-        <td>
-          {% if entity["Direct Premiums Written ($000) 2024"] is not none %}
-            ${{ "{:,.0f}".format(entity["Direct Premiums Written ($000) 2024"]) }}
-          {% else %}N/A{% endif %}
-        </td>
-        <td>
-          {% if entity["Market Share (%) 2024"] is not none %}
-            {{ "%.2f"|format(entity["Market Share (%) 2024"]) }}%
-          {% else %}N/A{% endif %}
-        </td>
-        <td>
-          {% if entity["Adjusted Loss Ratio (%) 2024"] is not none %}
-            {{ "%.1f"|format(entity["Adjusted Loss Ratio (%) 2024"]) }}%
-          {% else %}N/A{% endif %}
-        </td>
+        <td>${{ "{:,.0f}".format(entity["Direct Premiums Written ($000) 2024"]) }}</td>
+        <td>{{ "%.2f"|format(entity["Market Share (%) 2024"]) }}%</td>
+        <td>{{ "%.1f"|format(entity["Adjusted Loss Ratio (%) 2024"]) }}%</td>
       </tr>
       {% endfor %}
     </tbody>
