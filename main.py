@@ -7,6 +7,9 @@ import re
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
+# Add slugify filter to Jinja templates
+templates.env.filters["slugify"] = lambda s: re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-') if isinstance(s, str) else ""
+
 # Load group-level data
 group_df = pd.read_csv("data/cleaned_marketshare_groups.csv")
 group_df.rename(columns={

@@ -44,7 +44,7 @@
                 <td>${{ "{:,.0f}".format(group["Premium 2022"]) }}</td>
                 <td>
                     {% if group["Rank"] != "-" %}
-                    <a class="button" href="/group/{{ group['Group'] | lower | replace(' ', '-') | replace('(', '') | replace(')', '') }}">View</a>
+                    <a class="button" href="/group/{{ group['Group'] | slugify }}">View</a>
                     {% else %}-{% endif %}
                 </td>
             </tr>
