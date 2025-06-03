@@ -54,6 +54,7 @@ def slugify(text):
 
 # Entity-level data
 entity_df = pd.read_csv("data/cleaned_marketshare_entities.csv")
+entity_df.rename(columns={"Entity *": "Entity Name"}, inplace=True)
 
 def parse_float(val):
     try:

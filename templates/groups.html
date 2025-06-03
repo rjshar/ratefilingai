@@ -55,24 +55,25 @@
   <script>
     function sortTable(n) {
       const table = document.getElementById("market-table");
-      let rows, switching = true, dir = "asc", switchCount = 0;
+      let switching = true, dir = "asc", switchCount = 0;
 
       while (switching) {
         switching = false;
-        rows = table.rows;
+        const rows = table.rows;
         for (let i = 1; i < rows.length - 1; i++) {
           let shouldSwitch = false;
-          let x = rows[i].getElementsByTagName("TD")[n];
-          let y = rows[i + 1].getElementsByTagName("TD")[n];
-          let xVal = x.textContent.replace(/[^0-9.-]+/g, "");
-          let yVal = y.textContent.replace(/[^0-9.-]+/g, "");
-          xVal = parseFloat(xVal) || 0;
-          yVal = parseFloat(yVal) || 0;
+          let x = rows[i].getElementsByTagName("TD")[n].textContent.trim();
+          let y = rows[i + 1].getElementsByTagName("TD")[n].textContent.trim();
+
+          const xVal = isNaN(parseFloat(x)) ? x.toLowerCase() : parseFloat(x.replace(/[^0-9.-]+/g, ""));
+          const yVal = isNaN(parseFloat(y)) ? y.toLowerCase() : parseFloat(y.replace(/[^0-9.-]+/g, ""));
+
           if ((dir === "asc" && xVal > yVal) || (dir === "desc" && xVal < yVal)) {
             shouldSwitch = true;
             break;
           }
         }
+
         if (shouldSwitch) {
           rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
           switching = true;
