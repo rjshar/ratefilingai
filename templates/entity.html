@@ -1,108 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ group }} - Filing Details</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css">
+  <title>{{ group }} – RateFilingAI</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 0.5rem; border-bottom: 1px solid #ccc; text-align: right; }
+    th { background-color: #f0f0f0; text-align: center; cursor: pointer; }
+    td:first-child, th:first-child { text-align: left; width: 200px; }
+    tr:hover { background-color: #f9f9f9; }
+    h2 { margin-top: 2rem; }
+  </style>
 </head>
 <body>
-    <h1>{{ group }}</h1>
+  <h1>{{ group }}</h1>
 
+  {% if latest_filing %}
     <h2>Latest Filing</h2>
-    {% if latest_filing %}
     <ul>
-        <li><strong>Filing Type:</strong> {{ latest_filing["Filing Type"] }}</li>
-        <li><strong>Filing Method:</strong> {{ latest_filing["Filing Method"] }}</li>
-        <li><strong>Effective Date:</strong> {{ latest_filing["Effective Date"] }}</li>
-        <li><strong>Rates or LCMs:</strong> {{ latest_filing["Rates or LCMs"] }}</li>
-        <li><strong>SERFF Tracking #:</strong> {{ latest_filing["SERFF Tracking Number"] }} -
-            <a href="https://filingaccess.serff.com/sfa/home/MI" target="_blank">Search in SERFF</a>
-        </li>
+      <li><strong>Filing Type:</strong> {{ latest_filing["Filing Type"] }}</li>
+      <li><strong>Filing Method:</strong> {{ latest_filing["Filing Method"] }}</li>
+      <li><strong>Effective Date:</strong> {{ latest_filing["Effective Date"] or "—" }}</li>
+      <li><strong>Rates or LCMs:</strong> {{ latest_filing["Rates or LCMs"] }}</li>
+      <li><strong>SERFF Tracking #:</strong> {{ latest_filing["SERFF Tracking Number"] or "—" }} –
+        <a href="https://filingaccess.serff.com/sfa/home/MI" target="_blank">Search in SERFF</a>
+      </li>
     </ul>
 
-    {% if latest_filing.Entities and latest_filing.Entities|length > 0 %}
-    <h3>Entity Impacts</h3>
-    <table class="tablesorter" border="1" id="entityImpact">
+    {% if latest_filing.Entities %}
+      <h3>Entity Impacts</h3>
+      <table>
         <thead>
-        <tr>
-            <th>Entity</th><th>Rate Impact (%)</th><th>Premium Change</th><th>Policyholders</th>
-        </tr>
+          <tr>
+            <th>Entity</th>
+            <th>Rate Impact (%)</th>
+            <th>Premium Change</th>
+            <th>Policyholders</th>
+          </tr>
         </thead>
         <tbody>
         {% for entity in latest_filing.Entities %}
-        <tr>
+          <tr>
             <td>{{ entity["Entity"] }}</td>
             <td>{{ entity["Rate Impact (%)"] }}</td>
-            <td>${{ "{:,.0f}".format(entity["Written Premium Change"]) }}</td>
+            <td>${{ "{:,.0f}".format(entity["Written Premium Change"] or 0) }}</td>
             <td>{{ entity["Policyholders Affected"] }}</td>
-        </tr>
+          </tr>
         {% endfor %}
         </tbody>
-    </table>
+      </table>
     {% endif %}
-    {% else %}
-        <p>No filing found for this group.</p>
-    {% endif %}
+  {% endif %}
 
-    {% if filing_history and filing_history|length > 0 %}
-    <details>
-        <summary><strong>📜 Past Filings ({{ filing_history|length }})</strong></summary>
-        <table class="tablesorter" border="1" id="filingHistory">
-            <thead>
-            <tr>
-                <th>Effective Date</th><th>Type</th><th>SERFF</th><th>Rates/LCM</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for f in filing_history %}
-            <tr>
-                <td>{{ f["Effective Date"] or "?" }}</td>
-                <td>{{ f["Filing Type"] }}</td>
-                <td>
-                    {{ f["SERFF Tracking Number"] }} -
-                    <a href="https://filingaccess.serff.com/sfa/home/MI" target="_blank">Search</a>
-                </td>
-                <td>{{ f["Rates or LCMs"] }}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </details>
-    {% endif %}
-
-    {% if entity_marketshare and entity_marketshare|length > 0 %}
-    <h2>Entity Market Share</h2>
-    <table class="tablesorter" border="1" id="entityMarketshare">
-        <thead>
+  {% if filing_history %}
+    <h2>Filing History</h2>
+    <table>
+      <thead>
         <tr>
-            {% for key in entity_marketshare[0].keys() %}
-                <th>{{ key }}</th>
-            {% endfor %}
+          <th>Effective Date</th>
+          <th>Filing Type</th>
+          <th>SERFF #</th>
+          <th>Rates or LCMs</th>
         </tr>
-        </thead>
-        <tbody>
+      </thead>
+      <tbody>
+        {% for filing in filing_history %}
+        <tr>
+          <td>{{ filing["Effective Date"] or "—" }}</td>
+          <td>{{ filing["Filing Type"] }}</td>
+          <td>{{ filing["SERFF Tracking Number"] or "—" }}</td>
+          <td>{{ filing["Rates or LCMs"] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  {% if entity_marketshare %}
+    <h2>Entity Market Share</h2>
+    <table>
+      <thead>
+        <tr>
+          {% for key in entity_marketshare[0].keys() %}
+            <th>{{ key }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
         {% for row in entity_marketshare %}
         <tr>
-            {% for value in row.values() %}
-                <td>{{ value }}</td>
-            {% endfor %}
+          {% for value in row.values() %}
+            <td>{{ value }}</td>
+          {% endfor %}
         </tr>
         {% endfor %}
-        </tbody>
+      </tbody>
     </table>
-    {% endif %}
+  {% endif %}
 
-    <p><a href="/groups">⬅ Back to All Groups</a></p>
-
-    <script>
-        $(document).ready(function() {
-            $("#entityImpact").tablesorter();
-            $("#filingHistory").tablesorter();
-            $("#entityMarketshare").tablesorter();
-        });
-    </script>
+  <p><a href="/groups">⬅ Back to All Groups</a></p>
 </body>
 </html>

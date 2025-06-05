@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import pandas as pd
 import json
@@ -8,7 +7,6 @@ import os
 import re
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 def slugify(text):
@@ -16,17 +14,12 @@ def slugify(text):
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    return HTMLResponse("""<meta http-equiv='refresh' content='0; URL=/groups' />""")
+    return HTMLResponse("<meta http-equiv='refresh' content='0; URL=/groups' />")
 
 @app.get("/groups", response_class=HTMLResponse)
 async def groups_view(request: Request):
     df = pd.read_csv("data/cleaned_marketshare_groups.csv")
-    df = df.rename(columns={
-        "Market Share (%) 2024": "Market Share 2024",
-        "Direct Premiums Written ($000) 2024": "Direct Premium Written",
-    })
     df["Slug"] = df["Entity *"].apply(slugify)
-    df = df.sort_values("2024 Rank")
     return templates.TemplateResponse("groups.html", {"request": request, "groups": df.to_dict(orient="records")})
 
 @app.get("/group/{slug}", response_class=HTMLResponse)
