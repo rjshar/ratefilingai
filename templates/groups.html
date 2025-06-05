@@ -22,12 +22,12 @@
       <tr>
         <th onclick="sortTable(0)">Rank</th>
         <th onclick="sortTable(1)">Group</th>
-        <th onclick="sortTable(2)">2024 Share</th>
-        <th onclick="sortTable(3)">2023 Share</th>
-        <th onclick="sortTable(4)">2022 Share</th>
-        <th onclick="sortTable(5)">2024 Premium</th>
-        <th onclick="sortTable(6)">2023 Premium</th>
-        <th onclick="sortTable(7)">2022 Premium</th>
+        <th onclick="sortTable(2)">Market Share 2024</th>
+        <th onclick="sortTable(3)">Market Share 2023</th>
+        <th onclick="sortTable(4)">Market Share 2022</th>
+        <th onclick="sortTable(5)">Premium 2024</th>
+        <th onclick="sortTable(6)">Premium 2023</th>
+        <th onclick="sortTable(7)">Premium 2022</th>
         <th>Details</th>
       </tr>
     </thead>
@@ -36,7 +36,7 @@
       <tr>
         <td>{{ group["2024 Rank"] }}</td>
         <td>{{ group["Entity *"] }}</td>
-        <td>{{ "%.2f"|format(group["Market Share 2024"]) }}</td>
+        <td>{{ "%.2f"|format(group["Market Share (%) 2024"]) }}</td>
         <td>{{ "%.2f"|format(group["Market Share (%) 2023"]) }}</td>
         <td>{{ "%.2f"|format(group["Market Share (%) 2022"]) }}</td>
         <td>${{ "{:,.0f}".format(group["Direct Premiums Written ($000) 2024"]) }}</td>
