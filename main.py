@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 import pandas as pd
 import json
 import os
@@ -8,6 +9,7 @@ import re
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 def slugify(text):
     return re.sub(r'[^a-z0-9]+', '-', str(text).lower()).strip('-')
@@ -28,7 +30,7 @@ async def group_detail(request: Request, slug: str):
         filings_by_group = json.load(f)
 
     df_entity = pd.read_csv("data/cleaned_marketshare_entities.csv")
-    df_entity["Group Slug"] = df_entity["Group Name"].apply(slugify)
+    df_entity["Group Slug"] = df_entity["Group"].apply(slugify)
 
     for group_name, filings in filings_by_group.items():
         if slugify(group_name) == slug:
