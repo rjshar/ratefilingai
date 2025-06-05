@@ -1,0 +1,386 @@
+{
+  "The Travelers": {
+    "latest_filing": {
+      "SERFF Tracking Number": "TRVD-134272956",
+      "File": "TRVD-134272956.pdf",
+      "Group": "The Travelers",
+      "Filing Method": "File & Use",
+      "Filing Type": "CAOM Loss Costs/MWCPF Rates",
+      "Rates or LCMs": "LCM",
+      "Effective Date": "2025-01-01",
+      "Entities": [
+        {
+          "Entity": "Farmington Casualty\nCompany",
+          "Indicated Change (%)": -5.2,
+          "Rate Impact (%)": 1.601,
+          "Written Premium Change": 22161.0,
+          "Policyholders Affected": 907,
+          "Total Written Premium": 1384596.0,
+          "Max Change (%)": 26.4,
+          "Min Change (%)": -19.0
+        },
+        {
+          "Entity": "The Charter Oak Fire\nInsurance Company",
+          "Indicated Change (%)": -5.2,
+          "Rate Impact (%)": 0.83,
+          "Written Premium Change": 36530.0,
+          "Policyholders Affected": 603,
+          "Total Written Premium": 4400302.0,
+          "Max Change (%)": 26.4,
+          "Min Change (%)": -19.0
+        },
+        {
+          "Entity": "The Phoenix Insurance\nCompany",
+          "Indicated Change (%)": -5.2,
+          "Rate Impact (%)": 1.324,
+          "Written Premium Change": 25241.0,
+          "Policyholders Affected": 618,
+          "Total Written Premium": 1906800.0,
+          "Max Change (%)": 26.4,
+          "Min Change (%)": -19.0
+        },
+        {
+          "Entity": "The Travelers Indemnity\nCompany Of Connecticut",
+          "Indicated Change (%)": -5.2,
+          "Rate Impact (%)": 0.988,
+          "Written Premium Change": 16541.0,
+          "Policyholders Affected": 824,
+          "Total Written Premium": 1673834.0,
+          "Max Change (%)": 26.4,
+          "Min Change (%)": -19.0
+        },
+        {
+          "Entity": "Travelers Casualty and\nSurety Company",
+          "Indicated Change (%)": -5.2,
+          "Rate Impact (%)": 0.132,
+          "Written Premium Change": 4673.0,
+          "Policyholders Affected": 406,
+          "Total Written Premium": 3542346.0,
+          "Max Change (%)": 26.4,
+          "Min Change (%)": -19.0
+        },
+        {
+          "Entity": "Travelers Commercial\nCasualty Company",
+          "Indicated Change (%)": -5.2,
+          "Rate Impact (%)": 1.427,
+          "Written Premium Change": 44657.0,
+          "Policyholders Affected": 359,
+          "Total Written Premium": 3128516.0,
+          "Max Change (%)": 26.4,
+          "Min Change (%)": -19.0
+        },
+        {
+          "Entity": "Travelers Property",
+          "Indicated Change (%)": -5.2,
+          "Rate Impact (%)": 0.704,
+          "Written Premium Change": 21719.0,
+          "Policyholders Affected": 732,
+          "Total Written Premium": 3083603.0,
+          "Max Change (%)": 26.4,
+          "Min Change (%)": -19.0
+        }
+      ]
+    },
+    "filing_history": []
+  },
+  "Liberty Mutual": {
+    "latest_filing": {
+      "SERFF Tracking Number": "LWCM-134330566",
+      "File": "LWCM-134330566.pdf",
+      "Group": "Liberty Mutual",
+      "Filing Method": "File and Use",
+      "Filing Type": "CAOM Loss Costs/MWCPF Rates",
+      "Rates or LCMs": "LCM",
+      "Effective Date": "2025-01-01",
+      "Entities": [
+        {
+          "Entity": "Employers Insurance\nCompany of Wausau",
+          "Indicated Change (%)": -15.6,
+          "Rate Impact (%)": 2.4,
+          "Written Premium Change": 85362.0,
+          "Policyholders Affected": 191,
+          "Total Written Premium": 3556770.0,
+          "Max Change (%)": 15.3,
+          "Min Change (%)": -10.5
+        },
+        {
+          "Entity": "Liberty Mutual Insurance\nCompany",
+          "Indicated Change (%)": -15.6,
+          "Rate Impact (%)": 0.0,
+          "Written Premium Change": 0.0,
+          "Policyholders Affected": 0,
+          "Total Written Premium": 0.0,
+          "Max Change (%)": 0.0,
+          "Min Change (%)": 0.0
+        },
+        {
+          "Entity": "Liberty Mutual Fire\nInsurance Company",
+          "Indicated Change (%)": -15.6,
+          "Rate Impact (%)": 1.9,
+          "Written Premium Change": 138086.0,
+          "Policyholders Affected": 187,
+          "Total Written Premium": 7267664.0,
+          "Max Change (%)": 18.9,
+          "Min Change (%)": -13.9
+        },
+        {
+          "Entity": "LM Insurance Corporation",
+          "Indicated Change (%)": -15.6,
+          "Rate Impact (%)": 2.0,
+          "Written Premium Change": 52320.0,
+          "Policyholders Affected": 184,
+          "Total Written Premium": 2616004.0,
+          "Max Change (%)": 15.3,
+          "Min Change (%)": -11.4
+        },
+        {
+          "Entity": "The First Liberty\nInsurance Corporation",
+          "Indicated Change (%)": -15.6,
+          "Rate Impact (%)": 1.0,
+          "Written Premium Change": 8699.0,
+          "Policyholders Affected": 97,
+          "Total Written Premium": 869857.0,
+          "Max Change (%)": 12.5,
+          "Min Change (%)": -10.5
+        },
+        {
+          "Entity": "Liberty Insurance\nCorporation",
+          "Indicated Change (%)": -15.6,
+          "Rate Impact (%)": 1.1,
+          "Written Premium Change": 57403.0,
+          "Policyholders Affected": 232,
+          "Total Written Premium": 5218427.0,
+          "Max Change (%)": 12.5,
+          "Min Change (%)": -10.9
+        }
+      ]
+    },
+    "filing_history": []
+  },
+  "The Hartford Ins.": {
+    "latest_filing": {
+      "SERFF Tracking Number": "HART-134323234",
+      "File": "HART-134323234.pdf",
+      "Group": "The Hartford Ins.",
+      "Filing Method": "File and Use",
+      "Filing Type": "CAOM Loss Costs/MWCPF Rates",
+      "Rates or LCMs": "LCM",
+      "Effective Date": "2025-04-01",
+      "Entities": [
+        {
+          "Entity": "Hartford Underwriters\nInsurance Company",
+          "Indicated Change (%)": -12.4,
+          "Rate Impact (%)": -6.2,
+          "Written Premium Change": -185602.0,
+          "Policyholders Affected": 846,
+          "Total Written Premium": 2991737.0,
+          "Max Change (%)": 49.0,
+          "Min Change (%)": -43.7
+        },
+        {
+          "Entity": "Property and Casualty\nInsurance Company of\nHartford",
+          "Indicated Change (%)": -12.4,
+          "Rate Impact (%)": -6.2,
+          "Written Premium Change": -212840.0,
+          "Policyholders Affected": 729,
+          "Total Written Premium": 3430783.0,
+          "Max Change (%)": 49.0,
+          "Min Change (%)": -43.7
+        }
+      ]
+    },
+    "filing_history": []
+  },
+  "Accident Fund": {
+    "latest_filing": {
+      "SERFF Tracking Number": "ACCD-133863470",
+      "File": "ACCD-133863470.pdf",
+      "Group": "Accident Fund",
+      "Filing Method": "Use and File",
+      "Filing Type": "Rate",
+      "Rates or LCMs": "LCM",
+      "Effective Date": "2024-02-01",
+      "Entities": [
+        {
+          "Entity": "United Wisconsin\nInsurance Company",
+          "Indicated Change (%)": -3.1,
+          "Rate Impact (%)": -3.1,
+          "Written Premium Change": -12693.0,
+          "Policyholders Affected": 37,
+          "Total Written Premium": 412037.0,
+          "Max Change (%)": 0.0,
+          "Min Change (%)": -7.9
+        }
+      ]
+    },
+    "filing_history": []
+  },
+  "Chubb": {
+    "latest_filing": {
+      "SERFF Tracking Number": "ACEH-134265096",
+      "File": "ACEH-134265096.pdf",
+      "Group": "Chubb",
+      "Filing Method": "File & Use",
+      "Filing Type": "CAOM Loss Costs/MWCPF Rates",
+      "Rates or LCMs": "LCM",
+      "Effective Date": "2025-01-01",
+      "Entities": [
+        {
+          "Entity": "ACE Fire Underwriters\nInsurance Company",
+          "Indicated Change (%)": -9.1,
+          "Rate Impact (%)": 0.5,
+          "Written Premium Change": 0.0,
+          "Policyholders Affected": 0,
+          "Total Written Premium": 0.0,
+          "Max Change (%)": 0.0,
+          "Min Change (%)": 0.0
+        },
+        {
+          "Entity": "ACE Property and\nCasualty Insurance\nCompany",
+          "Indicated Change (%)": -9.1,
+          "Rate Impact (%)": 0.5,
+          "Written Premium Change": 1948.0,
+          "Policyholders Affected": 101,
+          "Total Written Premium": 391670.0,
+          "Max Change (%)": 14.5,
+          "Min Change (%)": -6.6
+        },
+        {
+          "Entity": "Bankers Standard\nInsurance Company",
+          "Indicated Change (%)": -9.1,
+          "Rate Impact (%)": 0.5,
+          "Written Premium Change": 6923.0,
+          "Policyholders Affected": 245,
+          "Total Written Premium": 1391786.0,
+          "Max Change (%)": 26.9,
+          "Min Change (%)": -10.5
+        },
+        {
+          "Entity": "Indemnity Insurance\nCompany of North\nAmerica",
+          "Indicated Change (%)": -9.1,
+          "Rate Impact (%)": 0.5,
+          "Written Premium Change": 996.0,
+          "Policyholders Affected": 2,
+          "Total Written Premium": 200321.0,
+          "Max Change (%)": 6.2,
+          "Min Change (%)": 0.0
+        },
+        {
+          "Entity": "Insurance Company of\nNorth America",
+          "Indicated Change (%)": -9.1,
+          "Rate Impact (%)": 0.5,
+          "Written Premium Change": 0.0,
+          "Policyholders Affected": 0,
+          "Total Written Premium": 0.0,
+          "Max Change (%)": 0.0,
+          "Min Change (%)": 0.0
+        },
+        {
+          "Entity": "Pacific Employers\nInsurance Company",
+          "Indicated Change (%)": -9.1,
+          "Rate Impact (%)": 0.5,
+          "Written Premium Change": 259.0,
+          "Policyholders Affected": 30,
+          "Total Written Premium": 52125.0,
+          "Max Change (%)": 3.4,
+          "Min Change (%)": 0.0
+        },
+        {
+          "Entity": "WESTCHESTER FIRE\nINSURANCE COMPANY",
+          "Indicated Change (%)": -9.1,
+          "Rate Impact (%)": 0.5,
+          "Written Premium Change": 0.0,
+          "Policyholders Affected": 0,
+          "Total Written Premium": 0.0,
+          "Max Change (%)": 0.0,
+          "Min Change (%)": 0.0
+        },
+        {
+          "Entity": "Chubb Indemnity",
+          "Indicated Change (%)": -9.1,
+          "Rate Impact (%)": 0.5,
+          "Written Premium Change": 10332.0,
+          "Policyholders Affected": 719,
+          "Total Written Premium": 2076941.0,
+          "Max Change (%)": 15.6,
+          "Min Change (%)": -10.5
+        }
+      ]
+    },
+    "filing_history": []
+  },
+  "Zurich Insurance": {
+    "latest_filing": {
+      "SERFF Tracking Number": "ZURC-134296980",
+      "File": "ZURC-134296980.pdf",
+      "Group": "Zurich Insurance",
+      "Filing Method": "File and Use",
+      "Filing Type": "CAOM Loss Costs/MWCPF Rates",
+      "Rates or LCMs": "LCM",
+      "Effective Date": "2025-01-01",
+      "Entities": [
+        {
+          "Entity": "American Zurich\nInsurance Company",
+          "Indicated Change (%)": 1.6,
+          "Rate Impact (%)": -0.9,
+          "Written Premium Change": -4226.0,
+          "Policyholders Affected": 156,
+          "Total Written Premium": 469610.0,
+          "Max Change (%)": 12.5,
+          "Min Change (%)": -8.4
+        },
+        {
+          "Entity": "American Guarantee and\nLiability Insurance\nCompany",
+          "Indicated Change (%)": 1.6,
+          "Rate Impact (%)": 1.6,
+          "Written Premium Change": 10895.0,
+          "Policyholders Affected": 68,
+          "Total Written Premium": 680911.0,
+          "Max Change (%)": 14.5,
+          "Min Change (%)": -10.5
+        },
+        {
+          "Entity": "Colonial American\nCasualty and Surety\nCompany",
+          "Indicated Change (%)": 1.6,
+          "Rate Impact (%)": 0.2,
+          "Written Premium Change": 0.0,
+          "Policyholders Affected": 0,
+          "Total Written Premium": 0.0,
+          "Max Change (%)": 0.2,
+          "Min Change (%)": 0.0
+        },
+        {
+          "Entity": "Fidelity and Deposit\nCompany of Maryland",
+          "Indicated Change (%)": 1.6,
+          "Rate Impact (%)": 0.2,
+          "Written Premium Change": 0.0,
+          "Policyholders Affected": 0,
+          "Total Written Premium": 0.0,
+          "Max Change (%)": 0.2,
+          "Min Change (%)": 0.0
+        },
+        {
+          "Entity": "Zurich American\nInsurance Company of\nIllinois",
+          "Indicated Change (%)": 1.6,
+          "Rate Impact (%)": -0.5,
+          "Written Premium Change": -11550.0,
+          "Policyholders Affected": 116,
+          "Total Written Premium": 2309909.0,
+          "Max Change (%)": 15.6,
+          "Min Change (%)": -8.6
+        },
+        {
+          "Entity": "Zurich American\nInsurance Company",
+          "Indicated Change (%)": 1.6,
+          "Rate Impact (%)": 0.5,
+          "Written Premium Change": 22308.0,
+          "Policyholders Affected": 290,
+          "Total Written Premium": 4461546.0,
+          "Max Change (%)": 12.5,
+          "Min Change (%)": -19.0
+        }
+      ]
+    },
+    "filing_history": []
+  }
+}
